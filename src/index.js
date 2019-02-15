@@ -1,15 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import TodoList from "./components/todo-list";
+import AppHeader from "./components/app-header";
+import SearchPanel from "./components/search-panel";
 
-import "./styles.css";
-
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>Todo App</h1>
+    <div>
+      <AppHeader />
+      <SearchPanel />
+      <TodoList />
     </div>
   );
-}
+};
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<App />, document.getElementById("root"));
