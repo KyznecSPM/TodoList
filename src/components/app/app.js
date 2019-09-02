@@ -1,24 +1,24 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import AppHeader from "../app-header";
-import SearchPanel from "../search-panel";
-import TodoList from "../todo-list/todo-list";
-import ItemStatusFilter from "../item-status-filter";
-import ItemAddForm from "../item-add-form";
+import AppHeader from '../app-header';
+import SearchPanel from '../search-panel';
+import TodoList from '../todo-list/todo-list';
+import ItemStatusFilter from '../item-status-filter';
+import ItemAddForm from '../item-add-form';
 
-import "./app.css";
+import './app.css';
 
 class App extends Component {
   maxId = 100;
 
   state = {
     todoData: [
-      this.createTodoItem("Drink Coffee"),
-      this.createTodoItem("Learn React"),
-      this.createTodoItem("Have a lunch")
+      this.createTodoItem('Drink Coffee'),
+      this.createTodoItem('Learn React'),
+      this.createTodoItem('Have a lunch'),
     ],
-    term: "",
-    filter: "all" // active, all, done
+    term: '',
+    filter: 'all', // active, all, done
   };
 
   createTodoItem(label) {
@@ -26,7 +26,7 @@ class App extends Component {
       label,
       important: false,
       done: false,
-      id: this.maxId++
+      id: this.maxId++,
     };
   }
   deleteItem = id => {
@@ -34,7 +34,7 @@ class App extends Component {
       const idx = todoData.findIndex(el => el.id === id);
       const newArray = [...todoData.slice(0, idx), ...todoData.slice(idx + 1)];
       return {
-        todoData: newArray
+        todoData: newArray,
       };
     });
   };
@@ -43,7 +43,7 @@ class App extends Component {
     const newItem = this.createTodoItem(text);
     this.setState(({ todoData }) => {
       return {
-        todoData: [...todoData, newItem]
+        todoData: [...todoData, newItem],
       };
     });
     // add element in array
@@ -59,7 +59,7 @@ class App extends Component {
   onToggleImportant = id => {
     this.setState(({ todoData }) => {
       return {
-        todoData: this.toggleProperty(todoData, id, "important")
+        todoData: this.toggleProperty(todoData, id, 'important'),
       };
     });
   };
@@ -67,7 +67,7 @@ class App extends Component {
   onToggleDone = id => {
     this.setState(({ todoData }) => {
       return {
-        todoData: this.toggleProperty(todoData, id, "done")
+        todoData: this.toggleProperty(todoData, id, 'done'),
       };
     });
   };
@@ -85,11 +85,11 @@ class App extends Component {
 
   filterItem(items, filter) {
     switch (filter) {
-      case "all":
+      case 'all':
         return items;
-      case "active":
+      case 'active':
         return items.filter(item => !item.done);
-      case "done":
+      case 'done':
         return items.filter(item => item.done);
       default:
         return items;
@@ -101,7 +101,7 @@ class App extends Component {
   };
 
   render() {
-    const { todoData, term, filter, onFilterChange } = this.state;
+    const { todoData, term, filter } = this.state;
     const visibleItems = this.filterItem(this.search(todoData, term), filter);
     const doneCount = todoData.filter(el => el.done).length;
     const todoCount = todoData.length - doneCount;
